@@ -1,0 +1,65 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif; /* Default font family for the page */
+    background-color: #f4f4f4;      /* Background color of the page */
+    color: #333;                    /* Default text color */
+}
+
+/* Navbar styling */
+nav {
+    background-color: #123a69;      /* Background color of the navbar */
+    color: white;                   /* Text color in the navbar */
+    padding: 20px;                  /* Padding inside the navbar */
+    height: 40px;                   /* Default height of the navbar */
+    font-size: 22px;                /* Default font size in the navbar */
+    font-family: Arial, sans-serif; /* Default font family in the navbar */
+    text-shadow: 0 1px 1px #25292d;    /* Default text shadow */
+    box-shadow: 1px 1px 2px #686e75;
+}
+
+/* Navbar link styling */
+nav a {
+    color: white;                   /* Text color for navbar links */
+    margin: 0 10px;                 /* Spacing between navbar links */
+    text-decoration: none;          /* Remove underline from links */
+    font-size: inherit;             /* Inherit the font size from nav */
+    font-family: inherit;           /* Inherit the font family from nav */
+    text-shadow: 1px 1px 1px #a2adb8;
+}
+
+/* Content styling */
+.content {
+    margin: 20px;                   /* Margin around the content area */
+}
+
+/* Heading styling */
+h2 {
+    color: #004080;                 /* Color of headings (e.g., h2) */
+    font-size: 26px;                /* Default font size for headings */
+    text-shadow: none;              /* Default text shadow for headings (none) */
+}
+
+/* Table styling */
+table {
+    width: 100%;                    /* Make table full width */
+    border-collapse: collapse;      /* Collapse borders for table cells */
+}
+
+/* Table header and cell styling */
+table, th, td {
+    border: 1px solid #ddd;         /* Border for table, headers, and cells */
+}
+
+th, td {
+    padding: 8px;                   /* Padding inside table headers and cells */
+    text-align: left;               /* Align text to the left in table cells */
+}
+
+/* Table header styling */
+th {
+    background-color: #f2f2f2;      /* Background color for table headers */
+    font-size: 16px;                /* Default font size for table headers */
+    font-family: Arial, sans-serif; /* Default font family for table headers */
+    color: #333;                    /* Text color for table headers */
+    text-shadow: none;              /* Default text shadow for table headers (none) */
+}

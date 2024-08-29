@@ -1,0 +1,47 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2>{{ portfolio.name }}</h2>
+
+<!-- Form to add new stock to the portfolio -->
+<h3>Add a New Stock</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Stock</button>
+</form>
+
+<!-- Display the stocks in the portfolio -->
+<h3>Stocks in Portfolio</h3>
+<table>
+    <tr>
+        <th>Ticker Symbol</th>
+        <th>Purchase Date</th>
+        <th>Purchase Price</th>
+        <th>Amount</th>
+        <th>Today's Value</th>
+        <th>Actions</th>
+    </tr>
+    {% for stock in stocks %}
+    <tr>
+        <td>{{ stock.ticker_symbol }}</td>
+        <td>{{ stock.purchase_date }}</td>
+        <td>{{ stock.purchase_price }}</td>
+        <td>{{ stock.amount }}</td>
+        <td>{{ stock.todays_value|floatformat:2 }}</td>
+        <td>
+            <!-- Form to delete stock -->
+            <form method="post" style="display:inline;">
+                {% csrf_token %}
+                <input type="hidden" name="stock_id" value="{{ stock.id }}">
+                <button type="submit" name="delete_stock" onclick="return confirm('Are you sure you want to delete this stock?');">
+                    Delete
+                </button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p><strong>Total Portfolio Value: {{ total_value|floatformat:2 }}</strong></p>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2>My Portfolios</h2>
+<ul>
+    {% for portfolio in portfolios %}
+    <li><a href="{% url 'portfolio_detail' portfolio.pk %}">{{ portfolio.name }}</a></li>
+    {% endfor %}
+</ul>
+<a href="{% url 'portfolio_add' %}">Add New Portfolio</a>
+{% endblock %}
