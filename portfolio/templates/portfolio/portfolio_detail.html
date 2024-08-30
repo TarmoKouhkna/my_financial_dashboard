@@ -44,4 +44,8 @@
 </table>
 
 <p><strong>Total Portfolio Value: {{ total_value|floatformat:2 }}</strong></p>
+
+<!-- Back to portfolio list -->
+<a href="{% url 'portfolio_list' %}" class="navbar-link">Back to Portfolio List</a>
+
 {% endblock %}

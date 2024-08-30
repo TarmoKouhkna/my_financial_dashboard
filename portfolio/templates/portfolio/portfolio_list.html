@@ -1,11 +1,13 @@
 {% extends 'portfolio/base.html' %}
 
 {% block content %}
-<h2>My Portfolios</h2>
-<ul>
-    {% for portfolio in portfolios %}
-    <li><a href="{% url 'portfolio_detail' portfolio.pk %}">{{ portfolio.name }}</a></li>
-    {% endfor %}
-</ul>
-<a href="{% url 'portfolio_add' %}">Add New Portfolio</a>
+    <ul class="portfolio-list">
+        {% for portfolio in portfolios %}
+            <li class="portfolio-list-item">
+                <a href="{% url 'portfolio_detail' portfolio.id %}" class="navbar-link">{{ portfolio.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'portfolio_add' %}" class="navbar-link">Add New Portfolio</a>
+    <a href="{% url 'logout' %}" class="logout-link">Logout</a>
 {% endblock %}

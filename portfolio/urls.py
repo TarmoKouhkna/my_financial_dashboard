@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LogoutView
 from django.urls import path
 from . import views
 
@@ -7,4 +8,5 @@ urlpatterns = [
     path('portfolio/<int:pk>/', views.portfolio_detail, name='portfolio_detail'),
     path('portfolio/add/', views.portfolio_add, name='portfolio_add'),
     path('register/', views.register, name='register'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]

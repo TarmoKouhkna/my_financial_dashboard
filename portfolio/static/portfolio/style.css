@@ -3,6 +3,10 @@ body {
     font-family: Arial, sans-serif; /* Default font family for the page */
     background-color: #f4f4f4;      /* Background color of the page */
     color: #333;                    /* Default text color */
+    margin: 0;                      /* Remove default margin */
+    padding: 0;                     /* Remove default padding */
+    box-sizing: border-box;         /* Ensure padding and borders are included in element's total width and height */
+    height: 100%;                   /* Ensure the body takes full height of the page */
 }
 
 /* Navbar styling */
@@ -11,20 +15,26 @@ nav {
     color: white;                   /* Text color in the navbar */
     padding: 20px;                  /* Padding inside the navbar */
     height: 40px;                   /* Default height of the navbar */
+    width: 100%;
     font-size: 22px;                /* Default font size in the navbar */
     font-family: Arial, sans-serif; /* Default font family in the navbar */
-    text-shadow: 0 1px 1px #25292d;    /* Default text shadow */
-    box-shadow: 1px 1px 2px #686e75;
+    text-shadow: 0 1px 1px #25292d; /* Text shadow in the navbar */
+    box-shadow: 1px 1px 2px #686e75; /* Add box shadow for depth */
+    margin: 0;                      /* Ensure no margin around the navbar */
 }
 
 /* Navbar link styling */
-nav a {
-    color: white;                   /* Text color for navbar links */
-    margin: 0 10px;                 /* Spacing between navbar links */
-    text-decoration: none;          /* Remove underline from links */
-    font-size: inherit;             /* Inherit the font size from nav */
-    font-family: inherit;           /* Inherit the font family from nav */
-    text-shadow: 1px 1px 1px #a2adb8;
+.navbar-link {
+    color: white !important;        /* Ensure navbar link color is white */
+    margin: 0 10px !important;      /* Margin between navbar links */
+    text-decoration: none !important; /* Remove underline from navbar links */
+    font-size: inherit !important;  /* Inherit the font size from nav */
+    font-family: inherit !important; /* Inherit the font family from nav */
+    text-shadow: 1px 1px 1px #a2adb8 !important; /* Text shadow for navbar links */
+}
+
+.navbar-link:hover {
+    text-decoration: underline;     /* Add underline on hover */
 }
 
 /* Content styling */
@@ -37,6 +47,9 @@ h2 {
     color: #004080;                 /* Color of headings (e.g., h2) */
     font-size: 26px;                /* Default font size for headings */
     text-shadow: none;              /* Default text shadow for headings (none) */
+    margin: 0;                      /* Remove margin from headings */
+    padding: 10px 0;                /* Add padding to the top and bottom of headings */
+    text-align: center;             /* Center align the heading text */
 }
 
 /* Table styling */
@@ -62,4 +75,74 @@ th {
     font-family: Arial, sans-serif; /* Default font family for table headers */
     color: #333;                    /* Text color for table headers */
     text-shadow: none;              /* Default text shadow for table headers (none) */
+}
+
+/* Container for the entire page content */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 60px);     /* Adjust height to subtract navbar height */
+    width: 100vw;                   /* Full viewport width */
+    margin: 0;                      /* No margin around the container */
+    padding: 0;                     /* No padding inside the container */
+    box-sizing: border-box;         /* Include padding and border in element's total width and height */
+}
+
+/* TradingView Widget Container */
+.tradingview-widget-container {
+    flex: 1;                        /* Allow the widget container to take up the remaining space */
+    margin: 0 auto;                 /* Center the widget horizontally */
+    padding: 50px;                     /* Ensure no padding inside the widget container */
+    box-sizing: border-box;
+    width: 100%;                    /* Full width of the container */
+    max-width: 3000px;              /* Limit maximum width for better alignment */
+    height: 100%;                   /* Full height of the container */
+}
+
+/* Adjust the width and height of the widget */
+.tradingview-widget-container__widget {
+    width: 100%;                    /* Full width of the widget */
+    height: 100%;                   /* Full height of the widget */
+}
+
+/* Adjust copyright section */
+.tradingview-widget-copyright {
+    text-align: center;             /* Center align the copyright text */
+    padding: 5px;                   /* Add some padding around the copyright text */
+    font-size: 12px;                /* Smaller font size for the copyright text */
+}
+
+/* Content area link styling */
+.content a {
+    color: #070707 !important;     /* Darker color for content links */
+    margin: 0 10px !important;     /* Margin between content links */
+    text-decoration: none !important; /* Remove underline from content links */
+    font-size: inherit;            /* Inherit font size */
+    font-family: inherit;          /* Inherit font family */
+    text-shadow: none !important;  /* No text shadow for content links */
+}
+
+.content a:hover {
+    text-decoration: underline;     /* Add underline on hover */
+}
+
+/* Specific styling for the portfolio list items */
+.portfolio-list-item {
+    list-style: none;               /* Remove bullet points from list */
+    margin: 10px 0;                 /* Add margin to separate list items */
+}
+
+/* Adjusted style for the logout link to match navbar link */
+.logout-link {
+    color: white !important;        /* Same color as navbar links */
+    text-decoration: none !important; /* Same text-decoration as navbar links */
+    font-size: inherit !important;  /* Match the navbar font size */
+    font-family: inherit !important; /* Match the navbar font family */
+    margin-left: 10px !important;   /* Add some space between portfolio links and logout */
+    text-shadow: 1px 1px 1px #a2adb8 !important; /* Same text shadow as navbar links */
+}
+
+/* Optional: Add hover effect to match navbar links */
+.logout-link:hover {
+    text-decoration: underline;     /* Add underline on hover */
 }

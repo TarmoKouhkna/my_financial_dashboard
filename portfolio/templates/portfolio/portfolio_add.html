@@ -1,10 +1,14 @@
 {% extends 'portfolio/base.html' %}
 
 {% block content %}
-<h2>Add New Portfolio</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
+    <h2>Add New Portfolio</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="navbar-link">Add Portfolio</button>
+    </form>
+
+    <a href="{% url 'portfolio_list' %}" class="navbar-link">Back to Portfolio List</a>
+    <a href="{% url 'logout' %}" class="logout-link">Logout</a>
 {% endblock %}
