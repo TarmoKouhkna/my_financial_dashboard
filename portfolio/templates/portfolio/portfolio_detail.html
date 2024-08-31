@@ -11,32 +11,55 @@
     <button type="submit">Add Stock</button>
 </form>
 
+<!-- Include Plotly.js -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<!-- Display the Plotly graph -->
+<div id="graph-div"></div>
+
+<script>
+    // Use the JSON-encoded data from the view
+    var plotlyData = {{ plotly_data_json|safe }};
+
+    // Render the graph using Plotly
+    Plotly.newPlot('graph-div', plotlyData, {
+        title: 'Portfolio Stocks',
+        xaxis: { title: 'Date' },
+        yaxis: { title: 'Price' },
+    });
+</script>
+
 <!-- Display the stocks in the portfolio -->
 <h3>Stocks in Portfolio</h3>
 <table>
     <tr>
+        <th>Select</th>
         <th>Ticker Symbol</th>
+        <th>Company</th>
         <th>Purchase Date</th>
         <th>Purchase Price</th>
         <th>Amount</th>
         <th>Today's Value</th>
+        <th>Gain/Loss (%)</th>
         <th>Actions</th>
     </tr>
     {% for stock in stocks %}
     <tr>
+        <td>
+            <input type="checkbox" class="stock-checkbox" data-ticker="{{ stock.ticker_symbol }}" checked>
+        </td>
         <td>{{ stock.ticker_symbol }}</td>
+        <td>{{ stock.company_name }}</td>
         <td>{{ stock.purchase_date }}</td>
         <td>{{ stock.purchase_price }}</td>
         <td>{{ stock.amount }}</td>
         <td>{{ stock.todays_value|floatformat:2 }}</td>
+        <td>{{ stock.gain_percentage|floatformat:2 }} %</td>
         <td>
-            <!-- Form to delete stock -->
             <form method="post" style="display:inline;">
                 {% csrf_token %}
                 <input type="hidden" name="stock_id" value="{{ stock.id }}">
-                <button type="submit" name="delete_stock" onclick="return confirm('Are you sure you want to delete this stock?');">
-                    Delete
-                </button>
+                <button type="submit" name="delete_stock" onclick="return confirm('Are you sure you want to delete this stock?');">Delete</button>
             </form>
         </td>
     </tr>
@@ -44,8 +67,28 @@
 </table>
 
 <p><strong>Total Portfolio Value: {{ total_value|floatformat:2 }}</strong></p>
+<p><strong>Total Portfolio Gain/Loss: {{ portfolio.total_gain_loss_percentage|floatformat:2 }} %</strong></p>
 
-<!-- Back to portfolio list -->
 <a href="{% url 'portfolio_list' %}" class="navbar-link">Back to Portfolio List</a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var checkboxes = document.querySelectorAll('.stock-checkbox');
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                var ticker = checkbox.getAttribute('data-ticker');
+                var traceVisibility = checkbox.checked ? true : 'legendonly';
+                var traceIndex = plotlyData.findIndex(function(trace) {
+                    return trace.name === ticker;
+                });
+
+                if (traceIndex !== -1) {
+                    Plotly.restyle('graph-div', { visible: traceVisibility }, [traceIndex]);
+                }
+            });
+        });
+    });
+</script>
 
 {% endblock %}

@@ -92,7 +92,7 @@ th {
 .tradingview-widget-container {
     flex: 1;                        /* Allow the widget container to take up the remaining space */
     margin: 0 auto;                 /* Center the widget horizontally */
-    padding: 50px;                     /* Ensure no padding inside the widget container */
+    padding: 50px;                  /* Ensure no padding inside the widget container */
     box-sizing: border-box;
     width: 100%;                    /* Full width of the container */
     max-width: 3000px;              /* Limit maximum width for better alignment */
@@ -145,4 +145,43 @@ th {
 /* Optional: Add hover effect to match navbar links */
 .logout-link:hover {
     text-decoration: underline;     /* Add underline on hover */
+}
+
+/* Style for buttons */
+button, input[type="submit"] {
+    color: #333 !important;        /* Button text color */
+    background-color: #f4f4f4;     /* Button background color */
+    border: 1px solid #ddd;        /* Button border */
+    padding: 8px 16px;             /* Padding inside the button */
+    font-size: 16px;               /* Font size for the button */
+    font-family: Arial, sans-serif;/* Font family for the button */
+    text-shadow: none;             /* No text shadow for button text */
+    cursor: pointer;               /* Pointer cursor on hover */
+}
+
+/* Add hover effect for buttons */
+button:hover, input[type="submit"]:hover {
+    background-color: #e0e0e0;    /* Background color change on hover */
+    color: #000 !important;       /* Text color on hover */
+}
+
+/* Style for the disabled buttons */
+button[disabled], input[type="submit"][disabled] {
+    background-color: #e0e0e0;    /* Lighter background for disabled buttons */
+    color: #999 !important;       /* Light text color for disabled buttons */
+    cursor: not-allowed;          /* Not-allowed cursor on hover */
+}
+
+/* Ensure buttons inside the navbar don't inherit the button styles */
+nav button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: white !important;
+    text-shadow: 1px 1px 1px #a2adb8 !important;
+    cursor: pointer;
+}
+
+nav button:hover {
+    text-decoration: underline;
 }

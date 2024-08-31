@@ -6,9 +6,9 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="navbar-link">Add Portfolio</button>
+        <button type="submit">Add Portfolio</button> <!-- Remove navbar-link class -->
     </form>
 
     <a href="{% url 'portfolio_list' %}" class="navbar-link">Back to Portfolio List</a>
-    <a href="{% url 'logout' %}" class="logout-link">Logout</a>
+
 {% endblock %}
