@@ -6,7 +6,7 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Add Portfolio</button> <!-- Remove navbar-link class -->
+        <button type="submit">Add Portfolio</button>
     </form>
 
     <a href="{% url 'portfolio_list' %}" class="navbar-link">Back to Portfolio List</a>

@@ -127,10 +127,14 @@ th {
 }
 
 /* Specific styling for the portfolio list items */
-.portfolio-list-item {
-    list-style: none;               /* Remove bullet points from list */
-    margin: 10px 0;                 /* Add margin to separate list items */
+.portfolio-list .portfolio-list-item {
+    list-style: circle;
+    margin: 30px 0;
+    font-size: 22px;
+    font-family: Arial, sans-serif;
+    color: #333;
 }
+
 
 /* Adjusted style for the logout link to match navbar link */
 .logout-link {
@@ -185,3 +189,100 @@ nav button {
 nav button:hover {
     text-decoration: underline;
 }
+
+.custom-button {
+    color: white;                     /* Text color */
+    background-color: #3f6b99;        /* Button background color */
+    border: none;                     /* No border */
+    padding: 8px 16px;                /* Padding inside the button */
+    font-size: 20px;                  /* Font size */
+    font-family: Arial, sans-serif;   /* Font family */
+    text-shadow: 1px 1px 2px #333;    /* Text shadow */
+    cursor: pointer;                  /* Pointer cursor on hover */
+    border-radius: 4px;               /* Rounded corners */
+}
+
+.custom-button:hover {
+    background-color: #033870;        /* Darker background on hover */
+    color: white;                     /* Text color on hover */
+}
+
+.add-portfolio-button {
+    color: #ffffff; /* Text color */
+    background-color: #4CAF50; /* Green background */
+    padding: 10px 20px; /* Padding */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold text */
+    display: inline-block; /* Make it look like a button */
+}
+
+.add-portfolio-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+    color: #fff; /* Keep text white on hover */
+}
+
+/* Style for all form labels */
+form label {
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Style for form input boxes to make them uniform */
+form input[type="text"], form input[type="password"], form input[type="date"], form input[type="number"] {
+    width: 50%; /* Full width of the form */
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Style for the "Add Stock" button */
+.add-stock-button {
+    color: #ffffff; /* Text color */
+    background-color: #4CAF50; /* Green background */
+    padding: 10px 20px; /* Padding inside the button */
+    display: inline-block; /* Inline block to fit the content */
+    margin-top: 15px; /* Add some space above the button */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold text */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    /* Remove width or set a smaller width */
+    width: auto; /* Auto width based on content */
+}
+
+.add-stock-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+
+
+/* Style for the login button, similar to the add-portfolio-button */
+.login-button {
+    color: #ffffff; /* Text color */
+    background-color: #4CAF50; /* Green background */
+    padding: 10px 20px; /* Padding inside the button */
+    display: block; /* Ensure the button is a block element */
+    margin-top: 15px; /* Add some space above the button */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold text */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    width: 30%; /* Set width to 30% of the parent container */
+    text-align: center; /* Center the text inside the button */
+}
+
+.login-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+

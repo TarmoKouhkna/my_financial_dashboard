@@ -1,33 +1,46 @@
-{% load static %}
+{% load static %} <!-- Loads the static files tag library to access static files -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Dashboard</title>
+    <meta charset="UTF-8"> <!-- Specifies the character encoding for the HTML document -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures proper rendering and touch zooming on mobile devices -->
+    <title>Financial Dashboard</title> <!-- Sets the title of the webpage -->
+
+    <!-- Links to the external CSS file (portfolio/style.css) which is stored in the static files directory -->
     <link rel="stylesheet" href="{% static 'portfolio/style.css' %}">
 </head>
 <body>
+    <!-- Navigation bar section -->
     <nav>
+        <!-- Link to the homepage or index view -->
         <a href="{% url 'index' %}" class="navbar-link">Markets</a>
-        {% if user.is_authenticated %}
+
+        {% if user.is_authenticated %} <!-- Checks if the user is logged in -->
+            <!-- Link to the portfolio list view for authenticated users -->
             <a href="{% url 'portfolio_list' %}" class="navbar-link">Portfolio</a>
+
+            <!-- Form for logging out the user -->
             <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: inline;">
-                {% csrf_token %}
+                {% csrf_token %} <!-- Adds a CSRF token to the form for security -->
+                <!-- Logout button styled with a custom CSS class -->
                 <button type="submit" class="custom-button">Logout</button>
             </form>
-        {% else %}
+        {% else %} <!-- If the user is not logged in, display login and register links -->
             <a href="{% url 'login' %}" class="navbar-link">Login</a>
             <a href="{% url 'register' %}" class="navbar-link">Register</a>
         {% endif %}
     </nav>
 
+    <!-- Content area where specific page content will be injected -->
     <div class="content">
-        {% block content %}{% endblock %}
+        {% block content %}{% endblock %} <!-- Placeholder for content blocks defined in child templates -->
     </div>
 
-    <!-- Ensure this is at the end so JavaScript has access to all elements -->
+    <!-- Include Plotly.js library for creating interactive charts and graphs -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- Placeholder for additional scripts to be injected by child templates -->
     {% block scripts %}{% endblock %}
 </body>
 </html>

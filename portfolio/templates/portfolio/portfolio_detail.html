@@ -7,8 +7,22 @@
 <h3>Add a New Stock</h3>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Add Stock</button>
+    <label for="ticker_symbol">Ticker symbol:</label>
+    <input type="text" name="ticker_symbol" id="ticker_symbol">
+
+    <label for="company_name">Company name:</label>
+    <input type="text" name="company_name" id="company_name" value="Unknown">
+
+    <label for="purchase_date">Purchase date:</label>
+    <input type="date" name="purchase_date" id="purchase_date">
+
+    <label for="purchase_price">Purchase price:</label>
+    <input type="number" step="0.01" name="purchase_price" id="purchase_price">
+
+    <label for="amount">Amount:</label>
+    <input type="number" name="amount" id="amount">
+
+    <button type="submit" class="add-stock-button">Add Stock</button>
 </form>
 
 <!-- Include Plotly.js -->
