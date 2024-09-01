@@ -117,5 +117,5 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 
 CSRF_TRUSTED_ORIGINS = [
-‘https://*.railway.app’
+'https://*.railway.app'
 ]
