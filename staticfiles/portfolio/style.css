@@ -1,0 +1,288 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif; /* Default font family for the page */
+    background-color: #f4f4f4;      /* Background color of the page */
+    color: #333;                    /* Default text color */
+    margin: 0;                      /* Remove default margin */
+    padding: 0;                     /* Remove default padding */
+    box-sizing: border-box;         /* Ensure padding and borders are included in element's total width and height */
+    height: 100%;                   /* Ensure the body takes full height of the page */
+}
+
+/* Navbar styling */
+nav {
+    background-color: #123a69;      /* Background color of the navbar */
+    color: white;                   /* Text color in the navbar */
+    padding: 20px;                  /* Padding inside the navbar */
+    height: 40px;                   /* Default height of the navbar */
+    width: 100%;
+    font-size: 22px;                /* Default font size in the navbar */
+    font-family: Arial, sans-serif; /* Default font family in the navbar */
+    text-shadow: 0 1px 1px #25292d; /* Text shadow in the navbar */
+    box-shadow: 1px 1px 2px #686e75; /* Add box shadow for depth */
+    margin: 0;                      /* Ensure no margin around the navbar */
+}
+
+/* Navbar link styling */
+.navbar-link {
+    color: white !important;        /* Ensure navbar link color is white */
+    margin: 0 10px !important;      /* Margin between navbar links */
+    text-decoration: none !important; /* Remove underline from navbar links */
+    font-size: inherit !important;  /* Inherit the font size from nav */
+    font-family: inherit !important; /* Inherit the font family from nav */
+    text-shadow: 1px 1px 1px #a2adb8 !important; /* Text shadow for navbar links */
+}
+
+.navbar-link:hover {
+    text-decoration: underline;     /* Add underline on hover */
+}
+
+/* Content styling */
+.content {
+    margin: 20px;                   /* Margin around the content area */
+}
+
+/* Heading styling */
+h2 {
+    color: #004080;                 /* Color of headings (e.g., h2) */
+    font-size: 26px;                /* Default font size for headings */
+    text-shadow: none;              /* Default text shadow for headings (none) */
+    margin: 0;                      /* Remove margin from headings */
+    padding: 10px 0;                /* Add padding to the top and bottom of headings */
+    text-align: center;             /* Center align the heading text */
+}
+
+/* Table styling */
+table {
+    width: 100%;                    /* Make table full width */
+    border-collapse: collapse;      /* Collapse borders for table cells */
+}
+
+/* Table header and cell styling */
+table, th, td {
+    border: 1px solid #ddd;         /* Border for table, headers, and cells */
+}
+
+th, td {
+    padding: 8px;                   /* Padding inside table headers and cells */
+    text-align: left;               /* Align text to the left in table cells */
+}
+
+/* Table header styling */
+th {
+    background-color: #f2f2f2;      /* Background color for table headers */
+    font-size: 16px;                /* Default font size for table headers */
+    font-family: Arial, sans-serif; /* Default font family for table headers */
+    color: #333;                    /* Text color for table headers */
+    text-shadow: none;              /* Default text shadow for table headers (none) */
+}
+
+/* Container for the entire page content */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 60px);     /* Adjust height to subtract navbar height */
+    width: 100vw;                   /* Full viewport width */
+    margin: 0;                      /* No margin around the container */
+    padding: 0;                     /* No padding inside the container */
+    box-sizing: border-box;         /* Include padding and border in element's total width and height */
+}
+
+/* TradingView Widget Container */
+.tradingview-widget-container {
+    flex: 1;                        /* Allow the widget container to take up the remaining space */
+    margin: 0 auto;                 /* Center the widget horizontally */
+    padding: 50px;                  /* Ensure no padding inside the widget container */
+    box-sizing: border-box;
+    width: 100%;                    /* Full width of the container */
+    max-width: 3000px;              /* Limit maximum width for better alignment */
+    height: 100%;                   /* Full height of the container */
+}
+
+/* Adjust the width and height of the widget */
+.tradingview-widget-container__widget {
+    width: 100%;                    /* Full width of the widget */
+    height: 100%;                   /* Full height of the widget */
+}
+
+/* Adjust copyright section */
+.tradingview-widget-copyright {
+    text-align: center;             /* Center align the copyright text */
+    padding: 5px;                   /* Add some padding around the copyright text */
+    font-size: 12px;                /* Smaller font size for the copyright text */
+}
+
+/* Content area link styling */
+.content a {
+    color: #070707 !important;     /* Darker color for content links */
+    margin: 0 10px !important;     /* Margin between content links */
+    text-decoration: none !important; /* Remove underline from content links */
+    font-size: inherit;            /* Inherit font size */
+    font-family: inherit;          /* Inherit font family */
+    text-shadow: none !important;  /* No text shadow for content links */
+}
+
+.content a:hover {
+    text-decoration: underline;     /* Add underline on hover */
+}
+
+/* Specific styling for the portfolio list items */
+.portfolio-list .portfolio-list-item {
+    list-style: circle;
+    margin: 30px 0;
+    font-size: 22px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+
+/* Adjusted style for the logout link to match navbar link */
+.logout-link {
+    color: white !important;        /* Same color as navbar links */
+    text-decoration: none !important; /* Same text-decoration as navbar links */
+    font-size: inherit !important;  /* Match the navbar font size */
+    font-family: inherit !important; /* Match the navbar font family */
+    margin-left: 10px !important;   /* Add some space between portfolio links and logout */
+    text-shadow: 1px 1px 1px #a2adb8 !important; /* Same text shadow as navbar links */
+}
+
+/* Optional: Add hover effect to match navbar links */
+.logout-link:hover {
+    text-decoration: underline;     /* Add underline on hover */
+}
+
+/* Style for buttons */
+button, input[type="submit"] {
+    color: #333 !important;        /* Button text color */
+    background-color: #f4f4f4;     /* Button background color */
+    border: 1px solid #ddd;        /* Button border */
+    padding: 8px 16px;             /* Padding inside the button */
+    font-size: 16px;               /* Font size for the button */
+    font-family: Arial, sans-serif;/* Font family for the button */
+    text-shadow: none;             /* No text shadow for button text */
+    cursor: pointer;               /* Pointer cursor on hover */
+}
+
+/* Add hover effect for buttons */
+button:hover, input[type="submit"]:hover {
+    background-color: #e0e0e0;    /* Background color change on hover */
+    color: #000 !important;       /* Text color on hover */
+}
+
+/* Style for the disabled buttons */
+button[disabled], input[type="submit"][disabled] {
+    background-color: #e0e0e0;    /* Lighter background for disabled buttons */
+    color: #999 !important;       /* Light text color for disabled buttons */
+    cursor: not-allowed;          /* Not-allowed cursor on hover */
+}
+
+/* Ensure buttons inside the navbar don't inherit the button styles */
+nav button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: white !important;
+    text-shadow: 1px 1px 1px #a2adb8 !important;
+    cursor: pointer;
+}
+
+nav button:hover {
+    text-decoration: underline;
+}
+
+.custom-button {
+    color: white;                     /* Text color */
+    background-color: #3f6b99;        /* Button background color */
+    border: none;                     /* No border */
+    padding: 8px 16px;                /* Padding inside the button */
+    font-size: 20px;                  /* Font size */
+    font-family: Arial, sans-serif;   /* Font family */
+    text-shadow: 1px 1px 2px #333;    /* Text shadow */
+    cursor: pointer;                  /* Pointer cursor on hover */
+    border-radius: 4px;               /* Rounded corners */
+}
+
+.custom-button:hover {
+    background-color: #033870;        /* Darker background on hover */
+    color: white;                     /* Text color on hover */
+}
+
+.add-portfolio-button {
+    color: #ffffff; /* Text color */
+    background-color: #4CAF50; /* Green background */
+    padding: 10px 20px; /* Padding */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold text */
+    display: inline-block; /* Make it look like a button */
+}
+
+.add-portfolio-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+    color: #fff; /* Keep text white on hover */
+}
+
+/* Style for all form labels */
+form label {
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Style for form input boxes to make them uniform */
+form input[type="text"], form input[type="password"], form input[type="date"], form input[type="number"] {
+    width: 50%; /* Full width of the form */
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Style for the "Add Stock" button */
+.add-stock-button {
+    color: #ffffff; /* Text color */
+    background-color: #4CAF50; /* Green background */
+    padding: 10px 20px; /* Padding inside the button */
+    display: inline-block; /* Inline block to fit the content */
+    margin-top: 15px; /* Add some space above the button */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold text */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    /* Remove width or set a smaller width */
+    width: auto; /* Auto width based on content */
+}
+
+.add-stock-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+
+
+/* Style for the login button, similar to the add-portfolio-button */
+.login-button {
+    color: #ffffff; /* Text color */
+    background-color: #4CAF50; /* Green background */
+    padding: 10px 20px; /* Padding inside the button */
+    display: block; /* Ensure the button is a block element */
+    margin-top: 15px; /* Add some space above the button */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold text */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    width: 30%; /* Set width to 30% of the parent container */
+    text-align: center; /* Center the text inside the button */
+}
+
+.login-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
