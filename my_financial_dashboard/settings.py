@@ -13,7 +13,7 @@ API_KEY = config('API_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['web-production-2f16ee.up.railway.app']
 
 # Application definition
 INSTALLED_APPS = [
@@ -102,10 +102,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"  # or use os.path.join(BASE_DIR, "staticfiles")
 
-# Additional locations of static files
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
 
 # Enable Gzip compression and cache headers for static files
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
