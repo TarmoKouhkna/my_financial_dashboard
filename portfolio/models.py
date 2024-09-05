@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from decimal import Decimal
 
+
 class Portfolio(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
@@ -40,7 +41,7 @@ class Security(models.Model):
         if self.purchase_price > 0:
             todays_value_decimal = Decimal(self.todays_value)
             return ((todays_value_decimal - (self.purchase_price * self.amount)) / (
-                        self.purchase_price * self.amount)) * 100
+                    self.purchase_price * self.amount)) * 100
         return Decimal('0.0')
 
     def __str__(self):

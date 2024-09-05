@@ -1,20 +1,17 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Portfolio, Security
-from .forms import AddStockForm, PortfolioForm
+import json
+import logging
+import urllib.parse
+from decimal import Decimal, InvalidOperation
 import requests
+from django.conf import settings
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from django.conf import settings
-from decimal import Decimal, InvalidOperation
-import urllib.parse
-import plotly.graph_objs as go
-import logging
-import json
 from plotly.utils import PlotlyJSONEncoder
-
-
-logger = logging.getLogger(__name__)
+from .forms import AddStockForm, PortfolioForm
+from .models import Portfolio, Security
+from datetime import datetime
 
 
 def index(request):
@@ -68,68 +65,96 @@ def get_current_price(ticker_symbol):
 
 def portfolio_detail(request, pk):
     portfolio = get_object_or_404(Portfolio, pk=pk)
+    stocks = portfolio.security_set.all()
+    form = AddStockForm(request.POST or None)
 
     if request.method == 'POST':
-        if 'delete_stock' in request.POST:
-            stock_id = request.POST.get('stock_id')
-            stock = get_object_or_404(Security, id=stock_id, portfolio=portfolio)
-            stock.delete()
-            return redirect('portfolio_detail', pk=portfolio.pk)
-
-        form = AddStockForm(request.POST)
         if form.is_valid():
             stock = form.save(commit=False)
             stock.portfolio = portfolio
-            current_price = get_current_price(stock.ticker_symbol)
-            if current_price is not None:
-                stock.todays_value = current_price * stock.amount
-            else:
-                stock.todays_value = 0.0  # Set to 0 if the price could not be fetched
-
-            # Manually entered company name will be saved directly from the form
             stock.save()
             return redirect('portfolio_detail', pk=portfolio.pk)
+
+    plot_data = []  # Will store data for each stock to send to the template
+    purchase_dates = [stock.purchase_date for stock in stocks if stock.purchase_date]  # Collect purchase dates
+
+    # Handle the case where there are no purchase dates
+    if purchase_dates:
+        earliest_purchase_date = min(purchase_dates)  # Find the earliest purchase date
     else:
-        form = AddStockForm()
+        earliest_purchase_date = None  # Set to None if there are no purchase dates
 
-    stocks = portfolio.security_set.all()
-
-    # Prepare Plotly data
-    traces = []
-    plotly_data = []
     for stock in stocks:
         current_price = get_current_price(stock.ticker_symbol)
         if current_price:
             stock.todays_value = current_price * stock.amount
             stock.save()
 
-            # Fetch historical data for the stock
+            # Fetch historical data for the stock (dates and prices)
             url = f'https://eodhistoricaldata.com/api/eod/{stock.ticker_symbol}.US?api_token={settings.API_KEY}&fmt=json&period=d&from=2024-01-01&to=2024-12-31'
             response = requests.get(url)
             data = response.json()
 
-            # Assume data comes as a list of dicts
+            # Prepare the data for Highcharts
             dates = [entry['date'] for entry in data]
             closing_prices = [entry['close'] for entry in data]
 
-            trace = go.Scatter(x=dates, y=closing_prices, mode='lines', name=stock.ticker_symbol)
-            traces.append(trace)
+            # Append stock data to plot_data list
+            plot_data.append({
+                'name': stock.ticker_symbol,  # Stock symbol (used for the series name)
+                'data': list(zip(dates, closing_prices))  # Highcharts expects a list of (date, price) pairs
+            })
 
-            # Add to plotly_data for JSON serialization
-            plotly_data.append(trace)
+        # Handle stock deletion
+        if request.method == 'POST' and 'delete_stock' in request.POST:
+            stock_id = request.POST.get('delete_stock')
+            stock_to_delete = get_object_or_404(Security, id=stock_id, portfolio=portfolio)
+            stock_to_delete.delete()
+            return redirect('portfolio_detail', pk=portfolio.pk)
 
-    total_value = sum(stock.todays_value for stock in stocks)
+        form = AddStockForm(request.POST or None)
+        if request.method == 'POST' and 'delete_stock' not in request.POST:  # Ensure we don't process the form on stock deletion
+            if form.is_valid():
+                stock = form.save(commit=False)
+                stock.portfolio = portfolio
+                stock.save()
+                return redirect('portfolio_detail', pk=portfolio.pk)
 
-    # Serialize Plotly data to JSON
-    plotly_data_json = json.dumps(plotly_data, cls=PlotlyJSONEncoder)  # Use the correct encoder
+        # Prepare plot data for chart and other data
+        plot_data = []  # Initialize an empty list to hold stock data
+
+        for stock in stocks:
+            current_price = get_current_price(stock.ticker_symbol)
+            if current_price:
+                stock.todays_value = current_price * stock.amount
+                stock.save()
+
+                # Fetch historical data for the stock (dates and prices)
+                url = f'https://eodhistoricaldata.com/api/eod/{stock.ticker_symbol}.US?api_token={settings.API_KEY}&fmt=json&period=d&from=2024-01-01&to=2024-12-31'
+                response = requests.get(url)
+                data = response.json()
+
+                # Prepare the data for Highcharts
+                dates = [entry['date'] for entry in data]
+                closing_prices = [entry['close'] for entry in data]
+
+                # Append stock data to plot_data list
+                plot_data.append({
+                    'name': stock.ticker_symbol,  # Stock symbol (used for the series name)
+                    'data': list(zip(dates, closing_prices))  # Highcharts expects a list of (date, price) pairs
+                })
+
+    # If there's an earliest purchase date, format it. Otherwise, set it to None for the template.
+    earliest_purchase_date_str = earliest_purchase_date.strftime('%Y-%m-%d') if earliest_purchase_date else None
 
     context = {
         'portfolio': portfolio,
+        'form': form,  # Pass the form to the template
         'stocks': stocks,
-        'total_value': total_value,
-        'form': form,
-        'plotly_data_json': plotly_data_json,  # Pass the serialized data to the template
+        'plot_data_json': json.dumps(plot_data),  # Pass the serialized plot data to the template
+        'earliest_purchase_date': earliest_purchase_date_str,  # Pass the earliest purchase date as a string or None
     }
+
     return render(request, 'portfolio/portfolio_detail.html', context)
 
 
