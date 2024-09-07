@@ -3,46 +3,86 @@
 {% block content %}
 <h2>{{ portfolio.name }}</h2>
 
+<!-- Create a container for the form and pie chart -->
+<div class="form-and-pie-container" style="display: flex; justify-content: space-between;">
+
     <!-- Add Stock Form -->
-<h3>Add a New Stock</h3>
-<form method="POST">
-    {% csrf_token %}
-    <label for="ticker_symbol">Ticker symbol:</label>
-    {{ form.ticker_symbol }}
-    <br>
-    <label for="company_name">Company name:</label>
-    {{ form.company_name }}
-    <br>
-    <label for="purchase_date">Purchase date:</label>
-    {{ form.purchase_date }}
-    <br>
-    <label for="purchase_price">Purchase price:</label>
-    {{ form.purchase_price }}
-    <br>
-    <label for="amount">Amount:</label>
-    {{ form.amount }}
-    <br>
-    <button type="submit" class="add-portfolio-button" style="margin-bottom: 20px;">Add Stock</button>
+    <div class="add-stock-form" style="width: 45%;">
+        <h3>Add a New Stock</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="ticker_symbol">Ticker symbol:</label>
+            {{ form.ticker_symbol }}
+            <br>
+            <label for="company_name">Company name:</label>
+            {{ form.company_name }}
+            <br>
+            <label for="purchase_date">Purchase date:</label>
+            {{ form.purchase_date }}
+            <br>
+            <label for="purchase_price">Purchase price:</label>
+            {{ form.purchase_price }}
+            <br>
+            <label for="amount">Amount:</label>
+            {{ form.amount }}
+            <br>
+            <button type="submit" class="add-portfolio-button" style="margin-bottom: 20px;">Add Stock</button>
+        </form>
+    </div>
 
-</form>
+    <!-- Pie Chart for Portfolio Distribution -->
+    <div class="pie-chart-container" style="width: 50%;">
+        <h3>Portfolio Distribution</h3>
+        <div id="portfolioPieChart" style="width:90%; height:500px;"></div>
+    </div>
 
+</div>
 
 <!-- Include Highcharts -->
 <script src="https://code.highcharts.com/highcharts.js"></script>
-
-<!-- Create a div to hold the chart -->
-<div id="portfolioChart" style="width:100%; height:400px;"></div>
-
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/full-screen.js"></script>
 
+<!-- Line Chart for Stock Prices -->
+<h3>Portfolio Stocks</h3>
+<div id="portfolioChart" style="width:100%; height:400px;"></div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Parse the data passed from Django
+        // Pie Chart
+        var pieData = {{ pie_data_json|safe }};  // Get the pie chart data from the context
+
+        Highcharts.chart('portfolioPieChart', {
+            chart: {
+                type: 'pie',
+            },
+            title: {
+                text: 'Portfolio Distribution by Stock'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    }
+                }
+            },
+            series: [{
+                name: 'Stocks',
+                colorByPoint: true,
+                data: pieData  // Use the data passed from Django
+            }]
+        });
+
+        // Line Chart for Stock Prices
         var plotData = {{ plot_data_json|safe }};
         var earliestPurchaseDate = new Date("{{ earliest_purchase_date }}").getTime();  // Convert to timestamp if it's valid
 
-        // Create the Highcharts chart
         var chart = Highcharts.chart('portfolioChart', {
             chart: {
                 type: 'line',
@@ -96,7 +136,6 @@
     });
 </script>
 
-
 <!-- Display other portfolio details -->
 <h3>Stocks in Portfolio</h3>
 <table>
@@ -135,9 +174,7 @@
     {% endfor %}
 </table>
 
-
 <p><strong>Total Portfolio Value: {{ total_value|floatformat:2 }}</strong></p>
-
 
 <a href="{% url 'portfolio_list' %}" class="add-portfolio-button">Back to Portfolio List</a>
 
