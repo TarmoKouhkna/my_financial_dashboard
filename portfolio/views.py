@@ -12,6 +12,7 @@ from plotly.utils import PlotlyJSONEncoder
 from .forms import AddStockForm, PortfolioForm
 from .models import Portfolio, Security
 from datetime import datetime
+from django.db.models import Sum
 
 
 def index(request):
@@ -84,7 +85,12 @@ def portfolio_detail(request, pk):
     else:
         earliest_purchase_date = None  # Set to None if there are no purchase dates
 
-    total_value = 0  # Initialize total portfolio value
+    # Initialize total_value before the loop
+    total_value = 0.0  # Set it to 0.0 initially to avoid UnboundLocalError
+
+    # Calculate total portfolio value directly from the database
+    if stocks.exists():  # Ensure there are stocks before summing
+        total_value = stocks.aggregate(Sum('todays_value'))['todays_value__sum'] or 0.0  # Sum the todays_value
 
     for stock in stocks:
         current_price = get_current_price(stock.ticker_symbol)
