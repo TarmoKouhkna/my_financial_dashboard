@@ -1,21 +1,27 @@
 {% extends 'portfolio/base.html' %}
 
 {% block content %}
-<div class="container">
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 85vh; padding: 0; margin: 0 auto; box-sizing: border-box;">
     <!-- Header Section -->
-    <h2>My Financial Dashboard</h2>
+    <h2 style="text-align: center; width: 100%;">My Financial Dashboard</h2>
 
     <!-- TradingView Widget Container -->
-    <div class="tradingview-widget-container">
-        <div id="tradingview-widget" class="tradingview-widget-container__widget"></div>
-        <div class="tradingview-widget-copyright">
-            <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
-                <span class="blue-text">Track all markets on TradingView</span>
-            </a>
-        </div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-        {
-        "autosize": true,
+    <div style="width: 100%; max-width: 1200px; height: 1vh; margin: 0 auto; padding: 0; box-sizing: border-box;">
+        <!-- Widget area -->
+        <div id="tradingview-widget" style="width: 100%; height: 100%;"></div>
+    </div>
+
+    <!-- TradingView copyright below the widget -->
+    <div style="text-align: center; padding-top: 2px; font-size: 12px;">
+        <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
+            <span style="color: #373759;">TradingView</span>
+        </a>
+    </div>
+
+    <!-- TradingView Script -->
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+    {
+        "width": "100%",
         "symbol": "AMEX:VOO",
         "interval": "D",
         "timezone": "Etc/UTC",
@@ -47,8 +53,7 @@
             "STD;Technical%1Ratings"
         ],
         "container_id": "tradingview-widget"
-        }
-        </script>
-    </div>
+    }
+    </script>
 </div>
 {% endblock %}

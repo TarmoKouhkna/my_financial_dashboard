@@ -88,23 +88,6 @@ th {
     box-sizing: border-box;         /* Include padding and border in element's total width and height */
 }
 
-/* TradingView Widget Container */
-.tradingview-widget-container {
-    flex: 1;                        /* Allow the widget container to take up the remaining space */
-    margin: 0 auto;                 /* Center the widget horizontally */
-    padding: 50px;                  /* Ensure no padding inside the widget container */
-    box-sizing: border-box;
-    width: 100%;                    /* Full width of the container */
-    max-width: 3000px;              /* Limit maximum width for better alignment */
-    height: 100%;                   /* Full height of the container */
-}
-
-/* Adjust the width and height of the widget */
-.tradingview-widget-container__widget {
-    width: 100%;                    /* Full width of the widget */
-    height: 100%;                   /* Full height of the widget */
-}
-
 /* Adjust copyright section */
 .tradingview-widget-copyright {
     text-align: center;             /* Center align the copyright text */
@@ -285,5 +268,4 @@ form input[type="text"], form input[type="password"], form input[type="date"], f
 .login-button:hover {
     background-color: #45a049; /* Darker green on hover */
 }
-
 
