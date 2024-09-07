@@ -22,7 +22,8 @@
     <label for="amount">Amount:</label>
     {{ form.amount }}
     <br>
-    <button type="submit" class="btn btn-primary">Add Stock</button>
+    <button type="submit" class="add-portfolio-button" style="margin-bottom: 20px;">Add Stock</button>
+
 </form>
 
 
@@ -137,5 +138,7 @@
 
 <p><strong>Total Portfolio Value: {{ total_value|floatformat:2 }}</strong></p>
 
-<a href="{% url 'portfolio_list' %}" class="navbar-link">Back to Portfolio List</a>
+
+<a href="{% url 'portfolio_list' %}" class="add-portfolio-button">Back to Portfolio List</a>
+
 {% endblock %}

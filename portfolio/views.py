@@ -84,6 +84,8 @@ def portfolio_detail(request, pk):
     else:
         earliest_purchase_date = None  # Set to None if there are no purchase dates
 
+    total_value = 0  # Initialize total portfolio value
+
     for stock in stocks:
         current_price = get_current_price(stock.ticker_symbol)
         if current_price:
@@ -153,6 +155,7 @@ def portfolio_detail(request, pk):
         'stocks': stocks,
         'plot_data_json': json.dumps(plot_data),  # Pass the serialized plot data to the template
         'earliest_purchase_date': earliest_purchase_date_str,  # Pass the earliest purchase date as a string or None
+        'total_value': total_value,  # Pass total portfolio value to the template
     }
 
     return render(request, 'portfolio/portfolio_detail.html', context)
