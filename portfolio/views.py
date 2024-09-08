@@ -1,5 +1,3 @@
-import json
-from decimal import Decimal
 import logging
 import urllib.parse
 from decimal import Decimal, InvalidOperation
@@ -13,6 +11,7 @@ from .forms import AddStockForm, PortfolioForm
 from .models import Portfolio, Security
 from datetime import datetime
 from django.db.models import Sum
+import json
 
 
 def index(request):
@@ -62,10 +61,6 @@ def get_current_price(ticker_symbol):
 
     # Return 0.0 if there was an error or no data
     return Decimal('0.0')
-
-
-import json
-from decimal import Decimal
 
 
 def portfolio_detail(request, pk):
