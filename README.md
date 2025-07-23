@@ -58,9 +58,9 @@ Before setting up the project, make sure you have the following installed:
 
 ## Deployment
 
-### 1. Whitenoise Setup
+### 1. WhiteNoise Setup
 
-This project uses Whitenoise for serving static files in production. Ensure you have Whitenoise installed:
+This project uses WhiteNoise for serving static files in production. Ensure you have WhiteNoise installed:
 
 ```bash
 pip install whitenoise
